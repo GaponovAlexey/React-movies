@@ -3,7 +3,7 @@ import React from 'react'
 export const Header = () => {
 	return (
 		<>
-			<nav className='#e1bee7 purple lighten-4'>
+			<nav className='purple lighten-4'>
 				<div  className="nav-wrapper">
 					<a href="!#" className="brand-logo right">Movies</a>
 					<ul id="nav-mobile" className="left hide-on-med-and-down">
