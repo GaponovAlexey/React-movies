@@ -5,7 +5,7 @@ import { Main } from "./Layout/Main";
 
 function App() {
   return (
-    <div>
+    <div className="main" >
       <Header />
       <Main />
       <Footer />

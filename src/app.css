@@ -19,3 +19,7 @@ nav {
 label:not(:last-child) {
 	margin-right: 3rem;
 }
+.main {
+	background-color: #FFE0B2
+;
+}
