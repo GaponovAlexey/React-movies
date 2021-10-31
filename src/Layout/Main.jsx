@@ -9,13 +9,13 @@ export const Main = () => {
 	const [isloading, setIsloading] = useState(true)
 
 	useEffect(() => {
-		fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&page=1&s=top`)
+		fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&page=1&s=top`)
 			.then(response => response.json())
 			.then(data => setstate(data.Search, setIsloading(p => p = false)))
 	}, [setstate])
 
 	const searchMovies = (str, type = 'all') => {
-		fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&page=1&s=${str}${type !== 'all' ? `&type=${type}` : ''}`)
+		fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&page=1&s=${str}${type !== 'all' ? `&type=${type}` : ''}`)
 			.then(response => response.json())
 			.then(data => setstate(data.Search))
 	}
