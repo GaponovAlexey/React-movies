@@ -12,7 +12,10 @@ export const Main = () => {
 		fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&page=1&s=top`)
 			.then(response => response.json())
 			.then(data => setstate(data.Search, setIsloading(p => p = false)))
-	}, [setstate])
+	}, [setstate]).catch(err => {
+		console.log(err)
+		setIsloading(p => p = false)
+	})
 
 	const searchMovies = (str, type = 'all') => {
 		fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&page=1&s=${str}${type !== 'all' ? `&type=${type}` : ''}`)
