@@ -6,32 +6,29 @@ export const fetchMovieActions = createAsyncThunk(
 	'movie/fetchMovieActions',
 	async function (_, { dispatch, rejectWithValue }) {
 		try {
-			const response = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&page=1&s=top`)
+			const response = await fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=top`)
 			if (!response.ok) {
 				throw new Error('get eerro')
 			}
 			const data = await response.json()
 			return data.Search
-			//return dispatch(addMovie(data.Search))
 		} catch (error) {
 			return rejectWithValue(error.massage)
 		}
 	}
 )
-export const deletMovies = createAsyncThunk(
-	'movie/delete',
-	async function (id, { rejectWithValue, dispatch }) {
+export const searchMovies = createAsyncThunk(
+	'movie/searchMovies',
+	async function (str, { rejectWithValue, dispatch }) {
 		try {
-			const r = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&page=1&s=top${id}`, {
-				method: 'DELETE'
-			})
-			console.log(r);
-			if (!r.ok) {
+			const response = await fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${str}`)
+			if (!response.ok) {
 				throw new Error('delet error')
 			}
-			return dispatch(removeMovie(id))
+			const data = await response.json()
+			return data.Search
 		} catch (e) {
-
+			return rejectWithValue(e.massage)
 		}
 	}
 )
@@ -43,7 +40,7 @@ export const mainReduser = createSlice({
 		movies: []
 	},
 	reducers: {
-		addMovie: (state, action) => {
+		Searchsss: (state, action) => {
 			state.movies = action.payload
 		},
 		removeMovie: (state, action) => {
@@ -62,11 +59,15 @@ export const mainReduser = createSlice({
 		[fetchMovieActions.rejected]: (state, action) => {
 			state.status = 'rejected'
 			state.errir = action.payload
+		},
+		[searchMovies.fulfilled]: (state, action) => {
+			state.status = 'resolve'
+			state.movies = action.payload
 		}
 	}
 })
 
-export const { addMovie, removeMovie } = mainReduser.actions
+export const { Searchsss, removeMovie } = mainReduser.actions
 
 export default mainReduser.reducer
 
