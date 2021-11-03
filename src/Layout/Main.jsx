@@ -3,14 +3,15 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { Movies } from '../components/Movies'
 import { Preloader } from '../components/Preloader'
-import { Search } from '../components/Search'
-import { addMovie, fetchMovieActions } from '../redux/reduser'
+//import { Search } from '../components/Search'
+import { fetchMovieActions } from '../redux/reduser'
 const API_KEY = process.env.REACT_APP_API_KEY
 
 export const Main = () => {
-	//const [state, setstate] = useState([])
 	const dispatch = useDispatch()
-	const state = useSelector(state => state.movi.movies)
+
+	const {status, movies } = useSelector(state => state.movi)
+	//const [state, setstate] = useState([])
 	//const [isloading, setIsloading] = useState(true)
 
 	//useEffect(() => {
@@ -28,18 +29,16 @@ export const Main = () => {
 	//if (isloading) {
 	//	return <Preloader />
 	//}
-
 	useEffect(() => {
-		dispatch(addMovie())
+		dispatch(fetchMovieActions())
 	}, [])
-
 
 	return (
 		<main className='conteiner content' >
 			<div>
 				{/*<Search searchMovies={ searchMovies } />*/ }
-				{/*<Movies movies={ state } />*/ }
-				{ state.map(e => <h1>{ e.name }</h1>) }
+				{ status === 'loading' && <h1>Loading...</h1>}
+				<Movies movies={ movies } />
 
 			</div>
 		</main>
