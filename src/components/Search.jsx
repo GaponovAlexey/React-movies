@@ -1,24 +1,31 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { searchMovies } from "../redux/reduser";
+const API_KEY = process.env.REACT_APP_API_KEY
 
-export const Search = ({ searchMovies }) => {
-	const [state, setState] = useState();
+
+
+export const Search = ({  }) => {
+	const [state, setState] = useState('');
 	const [type, setType] = useState("all");
+
+
 
 	const handleFilter = (e) => {
 		setType(type => type = e.target.dataset.type);
 		searchMovies(type, )
 	};
-
+const dispatch = useDispatch()
 	const send = (e) => {
 		if (e.key === "Enter") {
-			searchMovies(e => setState(d => d = e) )
+			dispatch(searchMovies(state))
 			setState("");
 		}
 	};
 
 	const sendBut = () => {
 		if (state.trim().length) {
-			searchMovies(state, type);
+			dispatch(searchMovies(state))
 			setState("");
 		}
 	};

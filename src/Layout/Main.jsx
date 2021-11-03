@@ -4,28 +4,12 @@ import { useDispatch } from 'react-redux'
 import { Movies } from '../components/Movies'
 import { Preloader } from '../components/Preloader'
 import { Search } from '../components/Search'
-import { fetchMovieActions,  Searchsss } from '../redux/reduser'
+import { fetchMovieActions } from '../redux/reduser'
 const API_KEY = process.env.REACT_APP_API_KEY
 
 export const Main = () => {
 
 	const { status, movies } = useSelector(state => state.movi)
-
-
-	//const [state, setstate] = useState([])
-	//const [isloading, setIsloading] = useState(true)
-
-	//useEffect(() => {
-	//	fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&page=1&s=top`)
-	//		.then(response => response.json())
-	//		.then(data => setstate(data.Search, setIsloading(p => p = false)))
-	//}, [setstate])
-
-	//const searchMovies = (str, type = 'all') => {
-	//	fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&page=1&s=${str}${type !== 'all' ? `&type=${type}` : ''}`)
-	//		.then(response => response.json())
-	//		.then(data => setstate(data.Search))
-	//}
 
 	
 	const dispatch = useDispatch()
@@ -39,7 +23,7 @@ export const Main = () => {
 	return (
 		<main className='conteiner content' >
 			<div>
-				<Search searchMovies={ Searchsss } />
+				<Search  />
 				<Movies movies={ movies } />
 
 			</div>
