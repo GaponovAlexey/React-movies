@@ -19,9 +19,11 @@ export const fetchMovieActions = createAsyncThunk(
 )
 export const searchMovies = createAsyncThunk(
 	'movie/searchMovies',
-	async function (str, { rejectWithValue, dispatch }) {
+	async function ({str, type = 'all'}, { rejectWithValue, dispatch }) {
 		try {
-			const response = await fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${str}`)
+			const response = await fetch(`
+			http://www.omdbapi.com/?apikey=${API_KEY}&s=${str}
+			${type !== 'all' ? `&type=${type}` : ''}`)
 			console.log('da');
 			if (!response.ok) {
 				throw new Error('delet error')

@@ -5,27 +5,28 @@ const API_KEY = process.env.REACT_APP_API_KEY
 
 
 
-export const Search = ({  }) => {
+export const Search = () => {
 	const [state, setState] = useState('');
 	const [type, setType] = useState("all");
+	const dispatch = useDispatch()
 
 
 
 	const handleFilter = (e) => {
-		setType(type => type = e.target.dataset.type);
-		searchMovies(type, )
+		setType(type => type = e.target.dataset.type)
+		dispatch(searchMovies({ str: state, type }))
 	};
-const dispatch = useDispatch()
+
 	const send = (e) => {
 		if (e.key === "Enter") {
-			dispatch(searchMovies(state))
-			setState("");
+			dispatch(searchMovies(({ str: state, type })))
+			setState('');
 		}
 	};
 
 	const sendBut = () => {
 		if (state.trim().length) {
-			dispatch(searchMovies(state))
+			dispatch(searchMovies({ str: state, type }))
 			setState("");
 		}
 	};
@@ -39,8 +40,6 @@ const dispatch = useDispatch()
 							onKeyDown={ send }
 							onChange={ (e) => setState(e.target.value) }
 							placeholder="search"
-							type="email"
-							className="validate"
 						/>
 						<button className="btn search-btn" onClick={ sendBut }>
 							send
@@ -58,7 +57,7 @@ const dispatch = useDispatch()
 								onChange={ handleFilter }
 								checked={ type === 'all' }
 							/>
-							<span>all </span>
+							<span>all</span>
 						</label>
 						<label>
 							<input
@@ -69,7 +68,7 @@ const dispatch = useDispatch()
 								onChange={ handleFilter }
 								checked={ type === 'movie' }
 							/>
-							<span> Movies only </span>
+							<span>Movies only</span>
 						</label>
 						<label>
 							<input

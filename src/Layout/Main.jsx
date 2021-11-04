@@ -17,6 +17,7 @@ export const Main = () => {
 		dispatch(fetchMovieActions())
 	}, [])
 	
+	
 	if (status === 'loading') {
 		return <Preloader />
 	}
